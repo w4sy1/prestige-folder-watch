@@ -1,5 +1,5 @@
 # Prestige Folder Watch
-PRESTIGE TECH — by Dominik Wasilak — v0.1.0
+PRESTIGE TECH — by Dominik Wasilak — v0.2.0
 
 Polling katalogu z historią create/modify/delete/rename i SHA256 w SQLite.
 

@@ -52,10 +52,14 @@ def watch(root,database,cycles,interval):
 def build():
     p=parser('Monitor plików; obserwacja nie wykonuje zmian w katalogu źródłowym.')
     p.add_argument('--root');p.add_argument('--database',default='watch.sqlite');p.add_argument('--cycles',type=int,default=1);p.add_argument('--interval',type=float,default=2)
+    p.add_argument('--backend',choices=['polling','native'],default='polling')
     return p
 
 def handle(a):
     if not a.root or not 1<=a.cycles<=100000 or a.interval<.1:raise ValueError('Nieprawidłowe argumenty.')
+    if a.backend=='native':
+        from native import watch as native_watch
+        return native_watch(a.root,a.database,a.cycles*a.interval)
     return watch(a.root,a.database,a.cycles,a.interval)
 
 if __name__=='__main__':sys.exit(entry(build,handle))
